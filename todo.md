@@ -51,3 +51,27 @@ telegram_bot
 
 ```
 **Step 4** - *Create API endpoints*
+
+# TODO List in Telegram-bot
+
+**Step 1** - *Register mbarakaj4 bot in Bot Father*
+
+**Step 2** - *Generate bot token*
+
+**Step 3** - *Make the following commands via ReplyKeyboard*
+
+- Solicitar asistencia técnica
+    * Preguntar que tipo de dispositivo es (Ej. Teléfono, laptop, pc\
+      impresora... etc)
+    * Preguntar por marca y modelo del dispositivo (Ej. SAMSUNG A50)
+    * Preguntar que problema tiene el dispositivo (Ej. No enciende, la\
+      pantalla se queda en blanco, etc)
+    * Preguntar que le paso al dispositivo (Ej. Se cayo en el agua, se\
+      mojo en el inodoro, se cayo en el piso etc)
+    * Mostrar un resumen y ofrecer editar los puntos anteriores
+    * Enviar petición respondiendo con numero de orden de trabajo y\
+      resumen del trabajo y dirección a donde entregar el dispositivo
+- Otros
+- Cancelar
+
+**Step 4** - *Make api connections*
