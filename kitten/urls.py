@@ -23,4 +23,12 @@ urlpatterns = [
     path('register/', views.register, name='register'),
     path('logout/', views.logout, name='logout'),
     path('dashboard/', views.dashboard, name='dashboard'),
+    path('dashboard/clients/', views.clients, name='clients'),
+    path('dashboard/orders/', views.orders, name='clients'),
+    path('dashboard/clients/add/', views.add_client, name='add_client'),
+    path('dashboard/clients/edit/<int:client_id>', views.edit_client, name='edit_client'),
+    path('dashboard/clients/delete/<int:client_id>', views.delete_client, name='delete_client'),
+    path('dashboard/clients/view/<int:client_id>', views.view_client, name='view_client'),
+    path('workorders/', views.workorders, name='workorders'),
+    path('workorders/details/<int:workorder_id>/', views.workorders_details, name='workorders_details'),
 ]
