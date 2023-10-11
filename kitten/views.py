@@ -8,7 +8,7 @@ from .models import User
 # Index view
 def index(request):
     if 'user' in request.session:
-        return render(request, "kitten/index.html")
+        return redirect("/dashboard/")
     else:
         return render(request, "auth/auth.html")
 
