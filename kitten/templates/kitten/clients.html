@@ -17,32 +17,32 @@
         <thead>
           <tr>
             <th scope="col">#</th>
-            <th scope="col">First</th>
-            <th scope="col">Last</th>
-            <th scope="col">Handle</th>
+            <th scope="col" class="text-center">Nombre</th>
+            <th scope="col" class="text-center">Apellido</th>
+            <th scope="col" class="text-center">Correo</th>
+            <th scope="col" class="text-center">Teléfono</th>
+            <th scope="col">Gestión</th>
           </tr>
         </thead>
         <tbody>
+          {% for user in users %}
           <tr>
-            <th scope="row">1</th>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>@mdo</td>
+            <th scope="row">{{user.id}}</t>
+            <td class="text-center">{{user.first_name}}</td>
+            <td class="text-center">{{user.last_name}}</td>
+            <td class="text-center">{{user.email_address}}</td>
+            <td class="text-center">{{user.phone_number}}</td>
+            <td>
+              <a href="{% url 'edit_client' user.id %}" class="btn btn-primary" >Editar</a>
+              <a href="{% url 'view_client' user.id %}" class="btn btn-primary">Ver</a>
+              {% if user.email_address != request.session.user %}
+              <a href="{% url 'delete_client' user.id %}"class="btn btn-primary">Borrar</a></td>
+              {% endif %}
           </tr>
-          <tr>
-            <th scope="row">2</th>
-            <td>Jacob</td>
-            <td>Thornton</td>
-            <td>@fat</td>
-          </tr>
-          <tr>
-            <th scope="row">3</th>
-            <td colspan="2">Larry the Bird</td>
-            <td>@twitter</td>
-          </tr>
+          {% endfor %}
         </tbody>
       </table>
-      <a href="{% url 'dashboard' %}" class="btn btn-primary">Atras</a>
+      <a href="{% url 'dashboard' %}" class="btn btn-primary">Atrás</a>
     </div>
 </div>
 {% endblock %}

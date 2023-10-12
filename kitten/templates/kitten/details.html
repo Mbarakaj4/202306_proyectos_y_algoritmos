@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% block title %} Dashboard {% endblock %}
+
+{% block links %}
+<form class="d-flex" role="search">
+    <input class="form-control me-2 type="search" placeholder="Search" aria-label="Search">
+    <button class="btn btn-outline-success" type="submit">Search</button>
+  </form>
+{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="card-body">
+      <h5 class="card-title">{{user.first_name}} {{user.last_name}}</h5>
+      <hr>
+      <div class="card-text">
+
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Apellido</th>
+            <th scope="col">Correo</th>
+            <th scope="col">Teléfono</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for user in users %}
+          <tr>
+            <th scope="row">{{user.id}}</th>
+            <td>{{user.first_name}}</td>
+            <td>{{user.last_name}}</td>
+            <td>{{user.email_address}}</td>
+            <td>{{user.phone_number}}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </div>
+      <a href="{% url 'clients' %}" class="btn btn-primary">Atrás</a>
+    </div>
+</div>
+{% endblock %}
