@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+{% block title %} Dashboard {% endblock %}
+{% block content %}
+<div class="container-fluid">
+  <div class="card-body">
+    <h5 class="card-title">Clientes recientes</h5>
+    <hr>
+    <table class="table card-text">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Nombre</th>
+          <th scope="col">Apellido</th>
+          <th scope="col">Correo</th>
+          <th scope="col">Teléfono</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for user in users %}
+        <tr>
+          <th scope="row">{{user.id}}</th>
+          <td>{{user.first_name}}</td>
+          <td>{{user.last_name}}</td>
+          <td>{{user.email_address}}</td>
+          <td>{{user.phone_number}}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    <a href="{% url 'clients' %}" class="btn btn-primary">Ver mas</a>
+  </div>
+  <div class="card-body mt-5">
+    <h5 class="card-title">Ordenes de trabajo recientes</h5>
+    <hr>
+    <table class="table card-text">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">First</th>
+          <th scope="col">Last</th>
+          <th scope="col">Handle</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row">1</th>
+          <td>Mark</td>
+          <td>Otto</td>
+          <td>@mdo</td>
+        </tr>
+        <tr>
+          <th scope="row">2</th>
+          <td>Jacob</td>
+          <td>Thornton</td>
+          <td>@fat</td>
+        </tr>
+        <tr>
+          <th scope="row">3</th>
+          <td colspan="2">Larry the Bird</td>
+          <td>@twitter</td>
+        </tr>
+      </tbody>
+    </table>
+    <a href="{% url 'orders' %}" class="btn btn-primary">Ver mas</a>
+  </div>
+</div>
+{% endblock %}

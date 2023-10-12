@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% block title %} Dashboard {% endblock %}
+
+{% block links %}
+<form class="d-flex" role="search">
+    <input class="form-control me-2 type="search" placeholder="Search" aria-label="Search">
+    <button class="btn btn-outline-success" type="submit">Search</button>
+  </form>
+{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="card-body">
+      <h5 class="card-title">Clientes</h5>
+      <hr>
+      <table class="table card-text">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col" class="text-center">Nombre</th>
+            <th scope="col" class="text-center">Apellido</th>
+            <th scope="col" class="text-center">Correo</th>
+            <th scope="col" class="text-center">Teléfono</th>
+            <th scope="col">Gestión</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for user in users %}
+          <tr>
+            <th scope="row">{{user.id}}</t>
+            <td class="text-center">{{user.first_name}}</td>
+            <td class="text-center">{{user.last_name}}</td>
+            <td class="text-center">{{user.email_address}}</td>
+            <td class="text-center">{{user.phone_number}}</td>
+            <td>
+              <a href="{% url 'edit_client' user.id %}" class="btn btn-primary" >Editar</a>
+              <a href="{% url 'view_client' user.id %}" class="btn btn-primary">Ver</a>
+              {% if user.email_address != request.session.user %}
+              <a href="{% url 'delete_client' user.id %}"class="btn btn-primary">Borrar</a></td>
+              {% endif %}
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      <a href="{% url 'dashboard' %}" class="btn btn-primary">Atrás</a>
+    </div>
+</div>
+{% endblock %}
