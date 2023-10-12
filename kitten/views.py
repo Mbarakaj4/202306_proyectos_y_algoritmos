@@ -1,6 +1,4 @@
 from django.shortcuts import redirect, render
-from django.db.models import Q
-from django.contrib.auth.hashers import make_password, check_password
 from .models import User
 
 # Create your views here.
@@ -13,66 +11,10 @@ def index(request):
         return render(request, "auth/auth.html")
 
 
-# Auth function
-def auth(request):
-    if request.method == "POST":
-        email = request.POST.get("email")
-        password = request.POST.get("password")
-        data = {
-            "email": email,
-            "password": password
-        }
-        # print(email, password)
-        try:
-            user = User.objects.filter( Q(email_address__startswith=data['email']) )
-        except:
-            print("User not found")
-            return redirect("/")
-        else:
-            request.session['user'] = data["email"]
-            if check_password(data['password'], user[0].password):
-                return redirect("/dashboard/")
-
-# Register function
-def register(request):
-    if request.method == "POST":
-        first_name = request.POST.get("first_name")
-        last_name = request.POST.get("last_name")
-        email = request.POST.get("email")
-        password = request.POST.get("password")
-        data = {
-            "first_name": first_name,
-            "last_name": last_name,
-            "email": email,
-            "password": password,
-        }
-        # print(email, password, first_name, last_name)
-        try:
-            user = User(
-                first_name=data['first_name'], 
-                last_name=data['last_name'], 
-                email_address=data['email'], 
-                password=make_password(data['password'])
-            )
-        except:
-            print('Something went wrong with the registration')
-            return redirect("/")
-        else:
-            user.save()
-            request.session['user'] = email
-            return redirect("/dashboard/")
-    
-
-# Logout function
-def logout(request):
-    request.session.clear()
-    return redirect("/")
-
-
 # Dashboard view
 def dashboard(request):
     if 'user' in request.session:
-        users = User.objects.all()
+        users = User.objects.all().order_by('-id')
         data = {
             "users": users
         }
@@ -84,7 +26,11 @@ def dashboard(request):
 # Dashboard/clients view
 def clients(request):
     if 'user' in request.session:
-        return render(request, "kitten/clients.html")
+        users = User.objects.all()
+        data = {
+            "users": users
+        }
+        return render(request, "kitten/clients.html", data)
     else:
         return redirect("/")
 
@@ -104,7 +50,7 @@ def add_client(request):
 
 
 # Dashboard/clients/edit function
-def edit_client(request):
+def edit_client(request, client_id):
     if 'user' in request.session:
         return render(request, "kitten/clients.html")
     else:
@@ -112,7 +58,7 @@ def edit_client(request):
 
 
 # Dashboard/clients/delete function
-def delete_client(request):
+def delete_client(request, client_id):
     if 'user' in request.session:
         return render(request, "kitten/clients.html")
     else:
@@ -120,9 +66,14 @@ def delete_client(request):
 
 
 # Dashboard/clients/view function
-def view_client(request):
+def view_client(request, client_id: int):
     if 'user' in request.session:
-        return render(request, "kitten/clients.html")
+        users = User.objects.filter(id__exact=client_id)
+        data = {
+            "users": users
+        }
+        print(data)
+        return render(request, "kitten/details.html", data)
     else:
         return redirect("/")
 
