@@ -11,32 +11,40 @@
 {% block content %}
 <div class="container-fluid">
     <div class="card-body">
-      <h5 class="card-title">{{user.first_name}} {{user.last_name}}</h5>
+      <h5 class="card-title">{{ action }}</h5>
       <hr>
       <div class="card-text">
-
-        <thead>
-          <tr>
-            <th scope="col">#</th>
-            <th scope="col">Nombre</th>
-            <th scope="col">Apellido</th>
-            <th scope="col">Correo</th>
-            <th scope="col">Teléfono</th>
-          </tr>
-        </thead>
-        <tbody>
-          {% for user in users %}
-          <tr>
-            <th scope="row">{{user.id}}</th>
-            <td>{{user.first_name}}</td>
-            <td>{{user.last_name}}</td>
-            <td>{{user.email_address}}</td>
-            <td>{{user.phone_number}}</td>
-          </tr>
-          {% endfor %}
-        </tbody>
+        <form>
+          <div class="input-group">
+            <span class="input-group-text">First and last name</span>
+            {% if action == 'Ver cliente' %}
+            <input type="text" aria-label="First name" placeholder="{{users.0.first_name}}" class="form-control" name="first_name">
+            <input type="text" aria-label="Last name" placeholder="{{users.0.last_name}}" class="form-control" name="last_name">
+            {% else %}
+            <input type="text" aria-label="First name" value="{{users.0.first_name}}" class="form-control" name="first_name">
+            <input type="text" aria-label="Last name" value="{{users.0.last_name}}" class="form-control" name="last_name">
+            {% endif %}
+          </div>
+          <div class="input-group flex-nowrap">
+            <span class="input-group-text" id="addon-wrapping">Email:</span>
+            {% if action == 'Ver cliente' %}
+            <input type="email" class="form-control" placeholder="{{ users.0.email_address }}" aria-label="email_address" aria-describedby="addon-wrapping" name="email_address">
+            {% else %}
+            <input type="email" class="form-control" value="{{ users.0.email_address }}" aria-label="email_address" aria-describedby="addon-wrapping" name="email_address">
+            {% endif %}
+          </div>
+          <div class="input-group flex-nowrap">
+            <span class="input-group-text" id="addon-wrapping">Numero de telefono</span>
+            {% if action == 'Ver cliente' %}
+            <input type="tel" class="form-control" placeholder="{{ users.0.phone_number }}" aria-label="phone_number" aria-describedby="addon-wrapping" name="phone_number">
+            {% else %}
+            <input type="tel" class="form-control" value="{{ users.0.phone_number }}" aria-label="phone_number" aria-describedby="addon-wrapping" name="phone_number">
+            {% endif %}
+          </div>
+          <button type="submit" class="btn btn-primary">Submit</button>
+          <a href="{% url 'clients' %}" class="btn btn-primary">Atrás</a>
+        </form>
       </div>
-      <a href="{% url 'clients' %}" class="btn btn-primary">Atrás</a>
     </div>
 </div>
 {% endblock %}
