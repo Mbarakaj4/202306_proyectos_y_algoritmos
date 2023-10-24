@@ -19,6 +19,7 @@ from . import views, auth
 
 urlpatterns = [
     path('', views.index, name='index'),
+    path('404/', views.error404, name='error404'),
     path('auth/', auth.auth, name='auth'),
     path('register/', auth.register, name='register'),
     path('logout/', auth.logout, name='logout'),
