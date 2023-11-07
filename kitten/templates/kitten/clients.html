@@ -16,7 +16,6 @@
       <table class="table card-text">
         <thead>
           <tr>
-            <th scope="col">#</th>
             <th scope="col" class="text-center">Nombre</th>
             <th scope="col" class="text-center">Apellido</th>
             <th scope="col" class="text-center">Correo</th>
@@ -27,7 +26,6 @@
         <tbody>
           {% for user in users %}
           <tr>
-            <th scope="row">{{user.id}}</t>
             <td class="text-center">{{user.first_name}}</td>
             <td class="text-center">{{user.last_name}}</td>
             <td class="text-center">{{user.email_address}}</td>
